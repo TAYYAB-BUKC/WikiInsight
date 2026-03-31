@@ -70,4 +70,10 @@ public class WikiService
             PageUrl: pageUrl
         );
     }
+
+    public async Task<Article> GetWikipediaPageForTitle(string title, bool full = false)
+    {
+        var url = CreateWikipediaUrl(title, full);
+        return await GetWikipediaPage(url);
+    }
 }
