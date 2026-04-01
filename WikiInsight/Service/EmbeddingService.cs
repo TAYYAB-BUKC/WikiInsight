@@ -5,13 +5,14 @@ namespace WikiInsight.Service;
 
 public class EmbeddingService
 {
-    public static async Task<float[]> GenerateEmbeddings(string wikipediaPageContent)
+    public static async Task<float[]> GenerateEmbeddings(string wikipediaPageContent, string? apiURL = "http://localhost:11434", string? model = "qwen3-embedding:0.6b")
     {
-        var uri = new Uri("http://localhost:11434");
-        var ollama = new OllamaApiClient(uri);
-        var vectors = new List<(string Word, float[] Vectors)>();
+        var uri = new Uri(apiURL);
+        var ollama = new OllamaApiClient(uri)
+        {
+            SelectedModel = model
+        };
 
-        ollama.SelectedModel = "qwen3-embedding:0.6b";
         EmbeddingGenerationOptions embeddingOptions = new()
         {
             Dimensions = 512
