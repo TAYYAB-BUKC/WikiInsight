@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="ContentStore\" />
     <Folder Include="Service\" />
   </ItemGroup>
 

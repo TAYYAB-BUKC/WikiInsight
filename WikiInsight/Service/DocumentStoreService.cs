@@ -5,9 +5,11 @@ namespace WikiInsight.Service;
 
 public class DocumentStoreService
 {
-    private const string DbFile = "WikiInsight_ContentStore.db";
+    private static readonly string DbFile = "WikiInsight_ContentStore.db";
     static DocumentStoreService()
     {
+        DbFile = Path.Combine(Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\")), "ContentStore", DbFile);
+
         using var conn = new SqliteConnection($"Data Source={DbFile}");
         conn.Open();
         using var cmd = conn.CreateCommand();
