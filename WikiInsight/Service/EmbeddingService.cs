@@ -5,7 +5,7 @@ namespace WikiInsight.Service;
 
 public class EmbeddingService
 {
-    public static async Task<float[]> GenerateEmbeddings(string wikipediaPageContent, string? apiURL = "http://localhost:11434", string? model = "qwen3-embedding:0.6b")
+    public async Task<float[]> GenerateEmbeddings(string wikipediaPageContent, string? apiURL = "http://localhost:11434", string? model = "qwen3-embedding:0.6b")
     {
         var uri = new Uri(apiURL);
         var ollama = new OllamaApiClient(uri)
