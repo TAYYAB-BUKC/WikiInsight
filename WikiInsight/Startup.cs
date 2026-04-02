@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Pinecone;
@@ -14,6 +15,13 @@ public static class Startup
 
         builder.Services.AddSingleton(client =>
             new PineconeClient(pineconeKey).Index(pineconeIndexName));
+
+        builder.Services.AddHttpClient("wikiClient", client =>
+        {
+            client.DefaultRequestHeaders.UserAgent.Clear();
+            client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("WikiInsight", "v1.0"));
+            client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("(Contact: write2tayyabarsalan+wikipedia@gmail.com)"));
+        });
 
         builder.Services.AddSingleton<EmbeddingService>();
         builder.Services.AddSingleton<IndexingService>();
