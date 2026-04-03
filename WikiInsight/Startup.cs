@@ -27,5 +27,14 @@ public static class Startup
         builder.Services.AddSingleton<IndexingService>();
         builder.Services.AddSingleton<WikiService>();
         builder.Services.AddSingleton<DocumentStoreService>();
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("FrontendCors", policy =>
+                    policy.WithOrigins("http://localhost:3000")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                );
+        });
     }
 }
