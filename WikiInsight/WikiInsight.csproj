@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Folder Include="ContentStore\" />
+    <Folder Include="Frontend\" />
     <Folder Include="Service\" />
   </ItemGroup>
 
