@@ -36,5 +36,7 @@ public static class Startup
                           .AllowAnyMethod()
                 );
         });
+
+        builder.Services.AddSingleton<VectorSearchService>();
     }
 }
