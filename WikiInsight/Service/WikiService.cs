@@ -6,7 +6,7 @@ using WikiInsight.Models;
 
 namespace WikiInsight.Service;
 
-public class WikiService
+public partial class WikiService
 {
     private readonly HttpClient client;
     private static readonly string API_BASE_URL = "https://en.wikipedia.org/w/api.php";
