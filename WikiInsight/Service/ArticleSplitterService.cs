@@ -1,3 +1,6 @@
+using Microsoft.SemanticKernel.Text;
+using WikiInsight.Models;
+
 namespace WikiInsight.Service;
 
 public class ArticleSplitterService(int MaxTokensPerChunk = 300, int OverlapTokens = 60)
@@ -43,5 +46,28 @@ public class ArticleSplitterService(int MaxTokensPerChunk = 300, int OverlapToke
             }
         }
         return lines;
+    }
+
+    public IEnumerable<ArticleChunk> Chunks(string title, string content, string pageUrl = "", string section = "")
+    {
+        var lines = SplitLines(content);
+        var chunkBodies = TextChunker.SplitPlainTextParagraphs(
+            lines: lines,
+            maxTokensPerParagraph: MaxTokensPerChunk,
+            overlapTokens: OverlapTokens,
+            chunkHeader: null,
+            tokenCounter: EstimateTokens
+        );
+
+        return chunkBodies.Select((chunkContent, index) =>
+            new ArticleChunk(
+                Id: UtilsService.ToUrlSafeId($"{title}_{section}_{index + 1:D2}"),
+                Title: title,
+                Section: section,
+                ChunkIndex: index + 1,
+                Content: chunkContent.Trim(),
+                SourcePageUrl: $"{pageUrl}#{UtilsService.ToUrlSafeId(section)}"
+            )
+        );
     }
 }
