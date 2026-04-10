@@ -24,4 +24,10 @@ app.MapGet("/search", async (string query, [FromServices] VectorSearchService ve
     return Results.Ok(results);
 });
 
+app.MapGet("/api/searchfullarticle", async (string query, [FromServices] VectorSearchService vectorSearchService) =>
+{
+    var results = await vectorSearchService.FindTopKArticleChunks(query, 3);
+    return Results.Ok(results);
+});
+
 app.Run();
