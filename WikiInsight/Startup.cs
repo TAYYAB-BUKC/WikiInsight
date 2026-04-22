@@ -40,5 +40,6 @@ public static class Startup
         builder.Services.AddSingleton<VectorSearchService>();
         builder.Services.AddSingleton<ArticleChunkStoreService>();
         builder.Services.AddSingleton<ArticleSplitterService>();
+        builder.Services.AddSingleton<PromptService>();
     }
 }
