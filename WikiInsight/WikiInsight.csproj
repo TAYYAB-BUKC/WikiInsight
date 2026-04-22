@@ -13,6 +13,9 @@
     <Folder Include="Frontend\" />
     <Folder Include="Prompts\" />
     <Folder Include="Service\" />
+    <None Include="Prompts\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
